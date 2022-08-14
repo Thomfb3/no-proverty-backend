@@ -5,7 +5,6 @@ const express = require("express");
 const cors = require("cors");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require("morgan");
 const app = express();
