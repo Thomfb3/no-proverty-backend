@@ -43,7 +43,8 @@ const UserSchema = new mongoose.Schema({
     ],
     location: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Location"
+        ref: "Location",
+        required: [true, 'Users must have a location']
     },
     password: {
         type: String,
@@ -59,7 +60,7 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
         select: false
-    },
+    }
 });
 
 
