@@ -2,10 +2,17 @@
 /** Express app for ChoresApp. */
 const path = require('path');
 const express = require("express");
+//security
 const cors = require("cors");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const cookieParser = require('cookie-parser');
+//middleware and error handling
+const { NotFoundError } = require("./expressError");
+const { authenticateJWT } = require("./middleware/authMiddleware");
+//import routes
+const authRoutes = require("./routes/auth");
+
 const morgan = require("morgan");
 const app = express();
 
@@ -31,9 +38,10 @@ app.use(mongoSanitize());
 app.use(xss());
 
 app.use(morgan("tiny"));
+app.use(authenticateJWT);
 
-
-
+// ROUTES
+app.use("/api/v1/auth", authRoutes);
 
 
 /** Handle 404 errors -- this matches everything */
