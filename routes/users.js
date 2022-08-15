@@ -14,7 +14,6 @@ router
         UserController.getAllUsers
     )
 
-
 router
     .route('/:id')
     .get(
@@ -32,7 +31,5 @@ router
         ensureAdmin,
         UserController.deleteUser
     );
-
-
 
 module.exports = router;

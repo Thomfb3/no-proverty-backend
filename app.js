@@ -13,10 +13,10 @@ const { authenticateJWT } = require("./middleware/authMiddleware");
 
 //import routes
 const authRoutes = require("./routes/auth");
-
 const userRoutes = require("./routes/users");
-
 const memberRoutes = require("./routes/members");
+const locationRoutes = require("./routes/locations");
+
 const morgan = require("morgan");
 const app = express();
 
@@ -47,6 +47,9 @@ app.use(authenticateJWT);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/members", memberRoutes);
+console.log("ONE")
+app.use("/api/v1/locations", locationRoutes);
+console.log("TWO")
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {

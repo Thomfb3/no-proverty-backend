@@ -5,7 +5,7 @@ const MemberController = require('./../controllers/memberController');
 const { uploadImages } = require('../helpers/handlerFileUpload');
 const { ensureLoggedIn, ensureAdmin } = require("../middleware/authMiddleware.js");
 
-/** Routes for users. */
+/** Routes for members. */
 router
     .route("/")
     .get(
