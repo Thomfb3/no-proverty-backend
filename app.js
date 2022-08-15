@@ -12,6 +12,7 @@ const { NotFoundError } = require("./expressError");
 const { authenticateJWT } = require("./middleware/authMiddleware");
 //import routes
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
 
 const morgan = require("morgan");
 const app = express();
@@ -42,6 +43,7 @@ app.use(authenticateJWT);
 
 // ROUTES
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRoutes);
 
 
 /** Handle 404 errors -- this matches everything */
