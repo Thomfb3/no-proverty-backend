@@ -1,4 +1,5 @@
 const catchAsync = require('./catchAsync');
+const APIFeatures = require('./apiFeatures');
 const { BadRequestError, NotFoundError } = require("../expressError");
 
 exports.createOne = Model =>
@@ -27,6 +28,43 @@ exports.getOne = (Model, popOptions) =>
             }
             res.status(200).json({
                 status: 'success',
+                data: doc
+            });
+        } catch (err) {
+            next(err);
+        }
+    });
+
+exports.getAll = (Model, limit) =>
+    catchAsync(async (req, res, next) => {
+        try {
+            let query = Model.find().limit(limit);
+            // if (popOptions) query = query.populate(popOptions);
+            const doc = await query;
+
+            res.status(200).json({
+                status: 'success',
+                data: doc
+            });
+        } catch (err) {
+            next(err);
+        }
+    });
+
+exports.getAllperUser = Model =>
+    catchAsync(async (req, res, next) => {
+        try {
+            let filter = { userId: userId };
+            const features = new APIFeatures(Model.find(filter), req.query)
+                .filter()
+                .sort()
+                .limitFields()
+                .paginate();
+            const doc = await features.query;
+
+            res.status(200).json({
+                status: 'success',
+                results: doc.length,
                 data: doc
             });
         } catch (err) {

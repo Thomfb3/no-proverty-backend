@@ -55,6 +55,7 @@ exports.updateUser = async (req, res, next) => {
 }
 
 exports.resizeUserImages = resizeImages("user");
-exports.createUser = factory.createOne(User)
+exports.createUser = factory.createOne(User);
+exports.getAllUsers = factory.getAll(User, 100)
 exports.deleteUser = factory.deleteOne(User);
 
